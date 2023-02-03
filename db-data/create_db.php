@@ -8,8 +8,6 @@
       die('Could not connect: ' . mysql_error());
    }
    
-   echo "Connected successfully\n";
-   
    $sql = 'CREATE Database test_db';
    $retval = mysql_query( $sql, $conn );
    
@@ -20,5 +18,6 @@
    
 
    }
+   echo "Connected successfully\n";
    mysql_close($conn);
 ?>
