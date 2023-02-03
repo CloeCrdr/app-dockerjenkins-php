@@ -6,7 +6,7 @@ services:
     ports:
       - '9000:80'
     volumes:
-      - ./app-dockerjenkis-php/db-data:/var/www/html/
+      - ./app-php/db-data:/var/www/html/
     networks:
       - frontend
       - backend
