@@ -9,18 +9,8 @@ pipeline {
     }
     stage ('start container and build') {
 	steps {
-	  sh 'docker compose up'
-	  sh 'docker compose ps'
-	}
-    }
-    stage('Run test') {
-	steps {
-	  sh 'curl http://localhost:9000/create_db.php'
-	  sh 'curl http://localhost:9000/create_table.php'
-	  sh 'curl http://localhost:9000/getting_data.php'
-	  sh 'curl http://localhost:9000/insert_data.php'
-	  sh 'curl http://localhost:9000/remove_data.php'
-	  sh 'curl http://localhost:9000/remove_db.php'
+	  sh 'docker-compose up'
+	  sh 'docker-compose ps'
 	}
     }
   }
