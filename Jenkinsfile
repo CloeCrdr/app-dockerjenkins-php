@@ -1,13 +1,32 @@
-node{
-  def app
+pipeline {
+  agent any
 
-    stage('Clone') {
-        checkout scm
+  stages {
+    stage('clone') {
+	steps {
+            checkout scm
+	}
     }
-
-    stage('Build') {
-
-      sh 'docker-compose up -d'
-
+    stage ("prune docker data") {
+	steps {
+	  sh 'docker system prune -a --volumes -f
+	}
     }
+    stage ('start container and build') {
+	steps {
+	  sh 'docker compose up -d --wait'
+	  sh 'docker compose ps'
+	}
+    }
+    stage('Run test') {
+	steps {
+	  sh 'curl http://localhost:9000'
+	}
+    }
+  }
+  post {
+    always {
+	sh 'docker compose down'
+    }
+  }
 }
