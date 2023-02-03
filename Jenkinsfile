@@ -14,7 +14,7 @@ pipeline {
     }
     stage ('start container and build') {
 	steps {
-	  sh 'docker compose up --detach '
+	  sh 'docker compose up'
 	  sh 'docker compose ps'
 	}
     }
