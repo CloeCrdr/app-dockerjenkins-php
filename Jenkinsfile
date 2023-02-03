@@ -1,18 +1,22 @@
-node{
-  def app
-
-    stage('Clone') {
-        checkout scm
+pipeline {
+    stages {
+	stage('Clone') {
+		steps {
+			echo 'Cloning your repository...'
+			checkout scm
+		}
+	}
+	stage('Build') {
+		steps {
+			echo 'Server is beein built'
+			sh 'docker-compose up -d'
+		}
+	}
+	stage('Launch') {
+		steps {
+			echo 'Test launching the server'
+			sh 'curl localhost:8080'
+		}
+	}
     }
-
-    stage('Build') {
-
-      sh 'docker-compose up -d'
-
-    }
-    stage('Test') {
-
-      sh 'curl localhost:9000'
-
-    }	
 }
