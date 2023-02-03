@@ -1,0 +1,25 @@
+version: '3.9'
+services:
+  web:
+    image: tutum/apache-php
+    hostname: web-php
+    ports:
+      - '9000:80'
+    volumes:
+      - ./app-dockerjenkis-php/db-data:/var/www/html/
+    networks:
+      - frontend
+      - backend
+
+  db:
+    image: mariadb
+    hostname: db
+    volumes:
+      - ./db-data:/var/lib/mysql
+    environment:
+      - MARIADB_ROOT_PASSWORD=root
+    networks:
+      - backend
+networks:
+  frontend:
+  backend:
