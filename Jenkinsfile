@@ -7,11 +7,6 @@ pipeline {
             checkout scm
 	}
     }
-    stage ("prune docker data") {
-	steps {
-	  sh 'docker system prune -a --volumes -f'
-	}
-    }
     stage ('start container and build') {
 	steps {
 	  sh 'docker compose up'
